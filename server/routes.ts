@@ -27,7 +27,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // User routes
   app.put('/api/users/profile', isAuthenticated, async (req: any, res) => {
     try {
-      const userId = req.user.claims.sub;
+      const userId = req.user.id;
       const updates = req.body;
       const user = await storage.updateUser(userId, updates);
       res.json(user);
@@ -50,7 +50,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Skill routes
   app.post('/api/skills', isAuthenticated, async (req: any, res) => {
     try {
-      const userId = req.user.claims.sub;
+      const userId = req.user.id;
       const skillData = { ...req.body, userId };
       const validatedSkill = insertSkillSchema.parse(skillData);
       const skill = await storage.createSkill(validatedSkill);
@@ -120,7 +120,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Availability routes
   app.post('/api/availability', isAuthenticated, async (req: any, res) => {
     try {
-      const userId = req.user.claims.sub;
+      const userId = req.user.id;
       const availabilityData = { ...req.body, userId };
       const availability = await storage.upsertAvailability(availabilityData);
       res.json(availability);
@@ -144,7 +144,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Swap request routes
   app.post('/api/swap-requests', isAuthenticated, async (req: any, res) => {
     try {
-      const requesterId = req.user.claims.sub;
+      const requesterId = req.user.id;
       const requestData = { ...req.body, requesterId };
       const validatedRequest = insertSwapRequestSchema.parse(requestData);
       const request = await storage.createSwapRequest(validatedRequest);
@@ -157,7 +157,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   app.get('/api/swap-requests/user', isAuthenticated, async (req: any, res) => {
     try {
-      const userId = req.user.claims.sub;
+      const userId = req.user.id;
       const requests = await storage.getSwapRequestsByUserId(userId);
       res.json(requests);
     } catch (error) {
@@ -203,7 +203,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Rating routes
   app.post('/api/ratings', isAuthenticated, async (req: any, res) => {
     try {
-      const raterId = req.user.claims.sub;
+      const raterId = req.user.id;
       const ratingData = { ...req.body, raterId };
       const validatedRating = insertRatingSchema.parse(ratingData);
       const rating = await storage.createRating(validatedRating);
@@ -228,7 +228,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Admin routes
   app.post('/api/admin/messages', isAuthenticated, async (req: any, res) => {
     try {
-      const adminId = req.user.claims.sub;
+      const adminId = req.user.id;
       const messageData = { ...req.body, adminId };
       const validatedMessage = insertAdminMessageSchema.parse(messageData);
       const message = await storage.createAdminMessage(validatedMessage);
@@ -284,7 +284,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Report routes
   app.post('/api/reports', isAuthenticated, async (req: any, res) => {
     try {
-      const reporterId = req.user.claims.sub;
+      const reporterId = req.user.id;
       const reportData = { ...req.body, reporterId };
       const validatedReport = insertReportSchema.parse(reportData);
       const report = await storage.createReport(validatedReport);

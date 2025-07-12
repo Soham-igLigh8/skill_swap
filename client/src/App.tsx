@@ -20,31 +20,11 @@ function Router() {
     <Switch>
       <Route path="/" component={Landing} />
       <Route path="/auth" component={AuthPage} />
-      <Route path="/home">
-        <ProtectedRoute>
-          <Home />
-        </ProtectedRoute>
-      </Route>
-      <Route path="/profile">
-        <ProtectedRoute>
-          <Profile />
-        </ProtectedRoute>
-      </Route>
-      <Route path="/browse">
-        <ProtectedRoute>
-          <Browse />
-        </ProtectedRoute>
-      </Route>
-      <Route path="/requests">
-        <ProtectedRoute>
-          <Requests />
-        </ProtectedRoute>
-      </Route>
-      <Route path="/admin">
-        <ProtectedRoute>
-          <Admin />
-        </ProtectedRoute>
-      </Route>
+      <Route path="/home" component={() => <ProtectedRoute><Home /></ProtectedRoute>} />
+      <Route path="/profile" component={() => <ProtectedRoute><Profile /></ProtectedRoute>} />
+      <Route path="/browse" component={() => <ProtectedRoute><Browse /></ProtectedRoute>} />
+      <Route path="/requests" component={() => <ProtectedRoute><Requests /></ProtectedRoute>} />
+      <Route path="/admin" component={() => <ProtectedRoute><Admin /></ProtectedRoute>} />
       <Route component={NotFound} />
     </Switch>
   );
