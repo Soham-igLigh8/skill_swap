@@ -1,0 +1,259 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: hsl(0, 0%, 100%);
+  --foreground: hsl(20, 14.3%, 4.1%);
+  --muted: hsl(60, 4.8%, 95.9%);
+  --muted-foreground: hsl(25, 5.3%, 44.7%);
+  --popover: hsl(0, 0%, 100%);
+  --popover-foreground: hsl(20, 14.3%, 4.1%);
+  --card: hsl(0, 0%, 100%);
+  --card-foreground: hsl(20, 14.3%, 4.1%);
+  --border: hsl(20, 5.9%, 90%);
+  --input: hsl(20, 5.9%, 90%);
+  --primary: hsl(210, 100%, 60%);
+  --primary-foreground: hsl(0, 0%, 100%);
+  --secondary: hsl(142, 71%, 45%);
+  --secondary-foreground: hsl(0, 0%, 100%);
+  --accent: hsl(38, 92%, 50%);
+  --accent-foreground: hsl(0, 0%, 100%);
+  --destructive: hsl(0, 84.2%, 60.2%);
+  --destructive-foreground: hsl(60, 9.1%, 97.8%);
+  --ring: hsl(210, 100%, 60%);
+  --radius: 0.5rem;
+}
+
+.dark {
+  --background: hsl(240, 10%, 3.9%);
+  --foreground: hsl(0, 0%, 98%);
+  --muted: hsl(240, 3.7%, 15.9%);
+  --muted-foreground: hsl(240, 5%, 64.9%);
+  --popover: hsl(240, 10%, 3.9%);
+  --popover-foreground: hsl(0, 0%, 98%);
+  --card: hsl(240, 10%, 3.9%);
+  --card-foreground: hsl(0, 0%, 98%);
+  --border: hsl(240, 3.7%, 15.9%);
+  --input: hsl(240, 3.7%, 15.9%);
+  --primary: hsl(210, 100%, 60%);
+  --primary-foreground: hsl(0, 0%, 100%);
+  --secondary: hsl(142, 71%, 45%);
+  --secondary-foreground: hsl(0, 0%, 100%);
+  --accent: hsl(38, 92%, 50%);
+  --accent-foreground: hsl(0, 0%, 100%);
+  --destructive: hsl(0, 62.8%, 30.6%);
+  --destructive-foreground: hsl(0, 0%, 98%);
+  --ring: hsl(240, 4.9%, 83.9%);
+  --radius: 0.5rem;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-sans antialiased bg-background text-foreground;
+  }
+}
+
+/* Custom animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes pulse-slow {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.3s ease-out;
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 2s infinite;
+}
+
+/* Glass effect utility */
+.glass-effect {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.dark .glass-effect {
+  background: rgba(30, 41, 59, 0.8);
+  border: 1px solid rgba(71, 85, 105, 0.3);
+}
+
+/* Hover effects */
+.hover-lift {
+  transition: transform 0.2s ease-in-out;
+}
+
+.hover-lift:hover {
+  transform: translateY(-2px);
+}
+
+/* Custom scrollbar */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: hsl(var(--muted));
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: hsl(var(--muted-foreground));
+  border-radius: 3px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--primary));
+}
+
+/* Skill category colors */
+.skill-tech {
+  @apply bg-blue-50 text-blue-700 border-blue-200;
+}
+
+.skill-design {
+  @apply bg-pink-50 text-pink-700 border-pink-200;
+}
+
+.skill-music {
+  @apply bg-purple-50 text-purple-700 border-purple-200;
+}
+
+.skill-language {
+  @apply bg-green-50 text-green-700 border-green-200;
+}
+
+.skill-business {
+  @apply bg-orange-50 text-orange-700 border-orange-200;
+}
+
+.skill-creative {
+  @apply bg-indigo-50 text-indigo-700 border-indigo-200;
+}
+
+.skill-sports {
+  @apply bg-red-50 text-red-700 border-red-200;
+}
+
+.skill-academic {
+  @apply bg-yellow-50 text-yellow-700 border-yellow-200;
+}
+
+.dark .skill-tech {
+  @apply bg-blue-900/20 text-blue-300 border-blue-800;
+}
+
+.dark .skill-design {
+  @apply bg-pink-900/20 text-pink-300 border-pink-800;
+}
+
+.dark .skill-music {
+  @apply bg-purple-900/20 text-purple-300 border-purple-800;
+}
+
+.dark .skill-language {
+  @apply bg-green-900/20 text-green-300 border-green-800;
+}
+
+.dark .skill-business {
+  @apply bg-orange-900/20 text-orange-300 border-orange-800;
+}
+
+.dark .skill-creative {
+  @apply bg-indigo-900/20 text-indigo-300 border-indigo-800;
+}
+
+.dark .skill-sports {
+  @apply bg-red-900/20 text-red-300 border-red-800;
+}
+
+.dark .skill-academic {
+  @apply bg-yellow-900/20 text-yellow-300 border-yellow-800;
+}
+
+/* Status indicators */
+.status-pending {
+  @apply bg-yellow-100 text-yellow-800 border-yellow-300;
+}
+
+.status-accepted {
+  @apply bg-green-100 text-green-800 border-green-300;
+}
+
+.status-rejected {
+  @apply bg-red-100 text-red-800 border-red-300;
+}
+
+.status-completed {
+  @apply bg-blue-100 text-blue-800 border-blue-300;
+}
+
+.status-cancelled {
+  @apply bg-gray-100 text-gray-800 border-gray-300;
+}
+
+.dark .status-pending {
+  @apply bg-yellow-900/20 text-yellow-300 border-yellow-800;
+}
+
+.dark .status-accepted {
+  @apply bg-green-900/20 text-green-300 border-green-800;
+}
+
+.dark .status-rejected {
+  @apply bg-red-900/20 text-red-300 border-red-800;
+}
+
+.dark .status-completed {
+  @apply bg-blue-900/20 text-blue-300 border-blue-800;
+}
+
+.dark .status-cancelled {
+  @apply bg-gray-900/20 text-gray-300 border-gray-800;
+}
+
+/* Loading states */
+.loading-shimmer {
+  background: linear-gradient(90deg, 
+    hsl(var(--muted)) 0%, 
+    hsl(var(--muted-foreground) / 0.1) 50%, 
+    hsl(var(--muted)) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* Responsive utilities */
+@media (max-width: 640px) {
+  .mobile-stack {
+    @apply flex-col space-y-4 space-x-0;
+  }
+  
+  .mobile-full {
+    @apply w-full;
+  }
+}
