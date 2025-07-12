@@ -55,7 +55,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         description: "You've successfully logged in.",
       });
       // Redirect to home after successful login
-      window.location.href = "/home";
+      setTimeout(() => {
+        window.location.href = "/home";
+      }, 100);
     },
     onError: (error: Error) => {
       toast({
@@ -78,7 +80,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         description: "Your account has been created successfully.",
       });
       // Redirect to home after successful registration
-      window.location.href = "/home";
+      setTimeout(() => {
+        window.location.href = "/home";
+      }, 100);
     },
     onError: (error: Error) => {
       toast({
@@ -99,6 +103,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         title: "Logged out",
         description: "You've been successfully logged out.",
       });
+      // Redirect to landing page after logout
+      setTimeout(() => {
+        window.location.href = "/";
+      }, 100);
     },
     onError: (error: Error) => {
       toast({

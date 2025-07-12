@@ -10,6 +10,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Loader2, Zap, Users, TrendingUp, Shield } from "lucide-react";
 import { useLocation } from "wouter";
+import { useEffect } from "react";
 
 const loginSchema = z.object({
   username: z.string().min(1, "Username is required"),
@@ -29,7 +30,7 @@ type RegisterData = z.infer<typeof registerSchema>;
 
 export default function AuthPage() {
   const [, setLocation] = useLocation();
-  const { user, loginMutation, registerMutation } = useAuth();
+  const { user, isLoading, loginMutation, registerMutation } = useAuth();
   const [activeTab, setActiveTab] = useState("login");
 
   const loginForm = useForm<LoginData>({
@@ -43,10 +44,11 @@ export default function AuthPage() {
   });
 
   // Redirect if already logged in
-  if (user) {
-    setLocation("/home");
-    return null;
-  }
+  useEffect(() => {
+    if (user && !isLoading) {
+      setLocation("/home");
+    }
+  }, [user, isLoading, setLocation]);
 
   const onLogin = (data: LoginData) => {
     loginMutation.mutate(data);

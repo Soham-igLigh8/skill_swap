@@ -24,7 +24,7 @@ Preferred communication style: Simple, everyday language.
 - **Language**: TypeScript with ES modules
 - **Database**: PostgreSQL with Drizzle ORM
 - **Database Provider**: Neon serverless PostgreSQL
-- **Authentication**: Replit Auth with OpenID Connect
+- **Authentication**: Username/password authentication with Passport.js
 - **Session Management**: Express sessions with PostgreSQL store
 
 ### Data Storage Solutions
@@ -36,10 +36,11 @@ Preferred communication style: Simple, everyday language.
 ## Key Components
 
 ### Authentication System
-- **Provider**: Replit Auth with OpenID Connect
+- **Provider**: Username/password authentication with Passport.js Local Strategy
 - **Session Management**: Express sessions with PostgreSQL backing
-- **User Management**: Automatic user creation and profile management
+- **User Management**: Manual user registration and login system
 - **Authorization**: Role-based access control (admin/user roles)
+- **Security**: Scrypt password hashing with salt
 
 ### Core Features
 - **Skill Management**: Users can create, categorize, and manage offered/wanted skills
@@ -60,11 +61,20 @@ Preferred communication style: Simple, everyday language.
 
 ## Data Flow
 
-1. **User Authentication**: Replit Auth handles OAuth flow, user data stored in PostgreSQL
+1. **User Authentication**: Username/password authentication with session management, user data stored in PostgreSQL
 2. **Skill Creation**: Users create skills through form validation, stored with Drizzle ORM
 3. **Skill Discovery**: Real-time search and filtering through API endpoints
 4. **Swap Requests**: Request creation, status updates, and messaging between users
 5. **Real-time Updates**: TanStack Query manages cache invalidation and data synchronization
+
+## Recent Changes (July 12, 2025)
+
+- **Authentication Overhaul**: Replaced Replit Auth with username/password authentication
+- **Router Fixes**: Completely rebuilt frontend routing system for stability
+- **Database Schema**: Updated users table with username and password fields
+- **Session Management**: Implemented PostgreSQL-based session storage
+- **UI/UX**: Maintained futuristic design theme throughout authentication flow
+- **Error Handling**: Added comprehensive error states and loading indicators
 
 ## External Dependencies
 
