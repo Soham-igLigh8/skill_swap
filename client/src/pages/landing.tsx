@@ -213,7 +213,7 @@ export default function Landing() {
           </p>
           <div className="mt-12 flex flex-col sm:flex-row gap-4 justify-center">
             <Button 
-              onClick={() => window.location.href = '/api/login'}
+              onClick={() => window.location.href = '/auth'}
               className="px-8 py-4 bg-white text-primary hover:bg-white hover:opacity-90 text-lg font-semibold transition-all hover:scale-105 shadow-lg"
             >
               Begin Your Evolution

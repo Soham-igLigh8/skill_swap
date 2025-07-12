@@ -1,4 +1,4 @@
-import { useAuth } from "@/hooks/useAuth";
+import { useAuth } from "@/hooks/use-auth";
 import { useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -9,7 +9,7 @@ import { ThemeToggle } from "@/components/theme-toggle";
 import { Zap, Search, RefreshCw, User, Settings, Bell, LogOut } from "lucide-react";
 
 export default function Navigation() {
-  const { user } = useAuth();
+  const { user, logoutMutation } = useAuth();
   const [location, navigate] = useLocation();
 
   const { data: swapRequests } = useQuery({
@@ -121,7 +121,7 @@ export default function Navigation() {
                     Admin
                   </DropdownMenuItem>
                 )}
-                <DropdownMenuItem onClick={() => window.location.href = "/api/logout"}>
+                <DropdownMenuItem onClick={() => logoutMutation.mutate()}>
                   <LogOut className="mr-2 h-4 w-4" />
                   Logout
                 </DropdownMenuItem>
