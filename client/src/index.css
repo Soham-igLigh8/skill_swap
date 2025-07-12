@@ -3,49 +3,63 @@
 @tailwind utilities;
 
 :root {
-  --background: hsl(0, 0%, 100%);
-  --foreground: hsl(20, 14.3%, 4.1%);
-  --muted: hsl(60, 4.8%, 95.9%);
-  --muted-foreground: hsl(25, 5.3%, 44.7%);
-  --popover: hsl(0, 0%, 100%);
-  --popover-foreground: hsl(20, 14.3%, 4.1%);
-  --card: hsl(0, 0%, 100%);
-  --card-foreground: hsl(20, 14.3%, 4.1%);
-  --border: hsl(20, 5.9%, 90%);
-  --input: hsl(20, 5.9%, 90%);
-  --primary: hsl(210, 100%, 60%);
+  /* Futuristic Light Theme */
+  --background: hsl(220, 40%, 98%);
+  --foreground: hsl(220, 20%, 15%);
+  --muted: hsl(210, 40%, 92%);
+  --muted-foreground: hsl(215, 16%, 47%);
+  --popover: hsl(220, 50%, 95%);
+  --popover-foreground: hsl(220, 20%, 15%);
+  --card: hsl(220, 50%, 95%);
+  --card-foreground: hsl(220, 20%, 15%);
+  --border: hsl(220, 30%, 85%);
+  --input: hsl(220, 30%, 90%);
+  --primary: hsl(260, 80%, 65%);
   --primary-foreground: hsl(0, 0%, 100%);
-  --secondary: hsl(142, 71%, 45%);
-  --secondary-foreground: hsl(0, 0%, 100%);
-  --accent: hsl(38, 92%, 50%);
+  --secondary: hsl(200, 50%, 90%);
+  --secondary-foreground: hsl(220, 20%, 25%);
+  --accent: hsl(280, 70%, 60%);
   --accent-foreground: hsl(0, 0%, 100%);
-  --destructive: hsl(0, 84.2%, 60.2%);
-  --destructive-foreground: hsl(60, 9.1%, 97.8%);
-  --ring: hsl(210, 100%, 60%);
-  --radius: 0.5rem;
+  --destructive: hsl(0, 84%, 60%);
+  --destructive-foreground: hsl(210, 40%, 98%);
+  --ring: hsl(260, 80%, 65%);
+  --radius: 0.75rem;
+  
+  /* Futuristic accents */
+  --glow-primary: hsl(260, 80%, 65%);
+  --glow-secondary: hsl(200, 80%, 55%);
+  --gradient-from: hsl(260, 80%, 65%);
+  --gradient-to: hsl(200, 80%, 55%);
 }
 
 .dark {
-  --background: hsl(240, 10%, 3.9%);
-  --foreground: hsl(0, 0%, 98%);
-  --muted: hsl(240, 3.7%, 15.9%);
-  --muted-foreground: hsl(240, 5%, 64.9%);
-  --popover: hsl(240, 10%, 3.9%);
-  --popover-foreground: hsl(0, 0%, 98%);
-  --card: hsl(240, 10%, 3.9%);
-  --card-foreground: hsl(0, 0%, 98%);
-  --border: hsl(240, 3.7%, 15.9%);
-  --input: hsl(240, 3.7%, 15.9%);
-  --primary: hsl(210, 100%, 60%);
-  --primary-foreground: hsl(0, 0%, 100%);
-  --secondary: hsl(142, 71%, 45%);
-  --secondary-foreground: hsl(0, 0%, 100%);
-  --accent: hsl(38, 92%, 50%);
-  --accent-foreground: hsl(0, 0%, 100%);
-  --destructive: hsl(0, 62.8%, 30.6%);
-  --destructive-foreground: hsl(0, 0%, 98%);
-  --ring: hsl(240, 4.9%, 83.9%);
-  --radius: 0.5rem;
+  /* Futuristic Dark Theme */
+  --background: hsl(220, 25%, 8%);
+  --foreground: hsl(220, 15%, 92%);
+  --muted: hsl(220, 25%, 15%);
+  --muted-foreground: hsl(215, 20%, 65%);
+  --popover: hsl(220, 25%, 12%);
+  --popover-foreground: hsl(220, 15%, 92%);
+  --card: hsl(220, 25%, 12%);
+  --card-foreground: hsl(220, 15%, 92%);
+  --border: hsl(220, 25%, 20%);
+  --input: hsl(220, 25%, 18%);
+  --primary: hsl(260, 80%, 70%);
+  --primary-foreground: hsl(220, 25%, 8%);
+  --secondary: hsl(220, 25%, 18%);
+  --secondary-foreground: hsl(220, 15%, 85%);
+  --accent: hsl(280, 70%, 65%);
+  --accent-foreground: hsl(220, 25%, 8%);
+  --destructive: hsl(0, 75%, 55%);
+  --destructive-foreground: hsl(210, 40%, 98%);
+  --ring: hsl(260, 80%, 70%);
+  --radius: 0.75rem;
+  
+  /* Futuristic accents */
+  --glow-primary: hsl(260, 80%, 70%);
+  --glow-secondary: hsl(200, 80%, 60%);
+  --gradient-from: hsl(260, 80%, 70%);
+  --gradient-to: hsl(200, 80%, 60%);
 }
 
 @layer base {
@@ -55,6 +69,57 @@
 
   body {
     @apply font-sans antialiased bg-background text-foreground;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+}
+
+@layer components {
+  /* Futuristic UI Components */
+  .futuristic-card {
+    @apply backdrop-blur-sm border rounded-xl shadow-lg;
+    background: linear-gradient(135deg, hsl(var(--card)) 0%, hsl(var(--card) / 0.8) 100%);
+    border-color: hsl(var(--border) / 0.5);
+  }
+  
+  .futuristic-button {
+    @apply relative overflow-hidden bg-gradient-to-r from-primary to-accent text-primary-foreground;
+    background: linear-gradient(135deg, hsl(var(--gradient-from)) 0%, hsl(var(--gradient-to)) 100%);
+    transition: all 0.3s ease;
+  }
+  
+  .futuristic-button:hover {
+    @apply scale-105 shadow-lg;
+    box-shadow: 0 10px 30px hsl(var(--glow-primary) / 0.3);
+  }
+  
+  .glow-effect {
+    @apply relative;
+  }
+  
+  .glow-effect::before {
+    content: '';
+    @apply absolute inset-0 rounded-lg opacity-30 blur-sm;
+    background: linear-gradient(135deg, hsl(var(--glow-primary)) 0%, hsl(var(--glow-secondary)) 100%);
+    z-index: -1;
+  }
+  
+  .futuristic-nav {
+    @apply backdrop-blur-md border-b;
+    background: linear-gradient(135deg, hsl(var(--card) / 0.9) 0%, hsl(var(--card) / 0.7) 100%);
+    border-color: hsl(var(--border) / 0.5);
+  }
+  
+  .cyber-grid {
+    background-image: 
+      linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+    background-size: 50px 50px;
+  }
+  
+  .dark .cyber-grid {
+    background-image: 
+      linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
   }
 }
 

@@ -307,7 +307,7 @@ export class DatabaseStorage implements IStorage {
       .from(ratings)
       .where(eq(ratings.rateeId, userId));
 
-    if (result.totalRatings > 0) {
+    if (result && result.totalRatings && Number(result.totalRatings) > 0) {
       await db
         .update(users)
         .set({

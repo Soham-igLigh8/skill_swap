@@ -5,6 +5,8 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { Badge } from "@/components/ui/badge";
 import { useQuery } from "@tanstack/react-query";
+import { ThemeToggle } from "@/components/theme-toggle";
+import { Zap, Search, RefreshCw, User, Settings, Bell, LogOut } from "lucide-react";
 
 export default function Navigation() {
   const { user } = useAuth();
@@ -21,62 +23,72 @@ export default function Navigation() {
   ).length || 0;
 
   const navItems = [
-    { name: "Dashboard", href: "/", icon: "fas fa-home" },
-    { name: "Browse Skills", href: "/browse", icon: "fas fa-search" },
-    { name: "My Requests", href: "/requests", icon: "fas fa-exchange-alt" },
-    { name: "Profile", href: "/profile", icon: "fas fa-user" },
+    { name: "Dashboard", href: "/", icon: Zap },
+    { name: "Browse Skills", href: "/browse", icon: Search },
+    { name: "My Requests", href: "/requests", icon: RefreshCw },
+    { name: "Profile", href: "/profile", icon: User },
   ];
 
   if (user?.isAdmin) {
-    navItems.push({ name: "Admin", href: "/admin", icon: "fas fa-cog" });
+    navItems.push({ name: "Admin", href: "/admin", icon: Settings });
   }
 
   return (
-    <nav className="bg-white dark:bg-slate-800 shadow-sm border-b border-slate-200 dark:border-slate-700 sticky top-0 z-50">
+    <nav className="futuristic-nav sticky top-0 z-50 cyber-grid">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center">
-            <div className="flex-shrink-0 flex items-center">
-              <i className="fas fa-exchange-alt text-primary text-2xl mr-3"></i>
-              <span className="text-xl font-bold text-slate-900 dark:text-white">SkillSwap</span>
+            <div className="flex-shrink-0 flex items-center glow-effect">
+              <div className="futuristic-button p-2 mr-3">
+                <RefreshCw className="h-6 w-6" />
+              </div>
+              <span className="text-xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+                SkillSwap
+              </span>
             </div>
             <div className="hidden md:block ml-10">
-              <div className="flex items-baseline space-x-4">
-                {navItems.map((item) => (
-                  <button
-                    key={item.href}
-                    onClick={() => navigate(item.href)}
-                    className={`${
-                      location === item.href
-                        ? "text-primary font-medium"
-                        : "text-slate-600 dark:text-slate-300 hover:text-primary"
-                    } px-3 py-2 rounded-md text-sm transition-colors flex items-center`}
-                  >
-                    <i className={`${item.icon} mr-2`}></i>
-                    {item.name}
-                    {item.name === "My Requests" && pendingCount > 0 && (
-                      <Badge variant="destructive" className="ml-2 text-xs">
-                        {pendingCount}
-                      </Badge>
-                    )}
-                  </button>
-                ))}
+              <div className="flex items-baseline space-x-2">
+                {navItems.map((item) => {
+                  const IconComponent = item.icon;
+                  return (
+                    <button
+                      key={item.href}
+                      onClick={() => navigate(item.href)}
+                      className={`${
+                        location === item.href
+                          ? "text-primary font-medium bg-primary/10 border border-primary/20"
+                          : "text-muted-foreground hover:text-primary hover:bg-primary/5"
+                      } px-4 py-2 rounded-lg text-sm transition-all flex items-center futuristic-card`}
+                    >
+                      <IconComponent className="h-4 w-4 mr-2" />
+                      {item.name}
+                      {item.name === "My Requests" && pendingCount > 0 && (
+                        <Badge className="ml-2 text-xs futuristic-button">
+                          {pendingCount}
+                        </Badge>
+                      )}
+                    </button>
+                  );
+                })}
               </div>
             </div>
           </div>
           <div className="flex items-center space-x-4">
+            <ThemeToggle />
             <div className="relative">
-              <button
+              <Button 
+                variant="outline" 
+                size="icon"
                 onClick={() => navigate("/requests")}
-                className="text-slate-600 dark:text-slate-300 hover:text-primary transition-colors"
+                className="futuristic-button border-primary/20 hover:border-primary/50"
               >
-                <i className="fas fa-bell text-lg"></i>
+                <Bell className="h-4 w-4" />
                 {pendingCount > 0 && (
-                  <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                  <span className="absolute -top-2 -right-2 bg-destructive text-destructive-foreground text-xs rounded-full h-5 w-5 flex items-center justify-center glow-effect">
                     {pendingCount}
                   </span>
                 )}
-              </button>
+              </Button>
             </div>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
@@ -89,35 +101,39 @@ export default function Navigation() {
                   </Avatar>
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent className="w-56" align="end" forceMount>
+              <DropdownMenuContent className="w-56 futuristic-card" align="end" forceMount>
                 <DropdownMenuItem onClick={() => navigate("/profile")}>
-                  <i className="fas fa-user mr-2"></i>
+                  <User className="mr-2 h-4 w-4" />
                   Profile
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={() => navigate("/requests")}>
-                  <i className="fas fa-exchange-alt mr-2"></i>
+                  <RefreshCw className="mr-2 h-4 w-4" />
                   My Requests
                   {pendingCount > 0 && (
-                    <Badge variant="destructive" className="ml-auto text-xs">
+                    <Badge className="ml-auto text-xs futuristic-button">
                       {pendingCount}
                     </Badge>
                   )}
                 </DropdownMenuItem>
                 {user?.isAdmin && (
                   <DropdownMenuItem onClick={() => navigate("/admin")}>
-                    <i className="fas fa-cog mr-2"></i>
+                    <Settings className="mr-2 h-4 w-4" />
                     Admin
                   </DropdownMenuItem>
                 )}
                 <DropdownMenuItem onClick={() => window.location.href = "/api/logout"}>
-                  <i className="fas fa-sign-out-alt mr-2"></i>
+                  <LogOut className="mr-2 h-4 w-4" />
                   Logout
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
-            <button className="p-2 rounded-md text-slate-600 dark:text-slate-300 hover:text-primary transition-colors md:hidden">
-              <i className="fas fa-bars"></i>
-            </button>
+            <Button 
+              variant="outline" 
+              size="icon"
+              className="md:hidden futuristic-button border-primary/20 hover:border-primary/50"
+            >
+              <Settings className="h-4 w-4" />
+            </Button>
           </div>
         </div>
       </div>
