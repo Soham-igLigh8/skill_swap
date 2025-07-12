@@ -23,7 +23,7 @@ export default function Navigation() {
   ).length || 0;
 
   const navItems = [
-    { name: "Dashboard", href: "/", icon: Zap },
+    { name: "Dashboard", href: "/home", icon: Zap },
     { name: "Browse Skills", href: "/browse", icon: Search },
     { name: "My Requests", href: "/requests", icon: RefreshCw },
     { name: "Profile", href: "/profile", icon: User },

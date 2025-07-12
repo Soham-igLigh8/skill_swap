@@ -4,7 +4,8 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { ThemeProvider } from "@/components/theme-provider";
-import { AuthProvider, useAuth } from "@/hooks/use-auth";
+import { AuthProvider } from "@/hooks/use-auth";
+import { ProtectedRoute } from "@/lib/protected-route";
 import NotFound from "@/pages/not-found";
 import Landing from "@/pages/landing";
 import AuthPage from "@/pages/auth-page";
@@ -15,33 +16,43 @@ import Requests from "@/pages/requests";
 import Admin from "@/pages/admin";
 
 function Router() {
-  const { user, isLoading } = useAuth();
-  const isAuthenticated = !!user;
-
-  if (isLoading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
-      </div>
-    );
-  }
-
   return (
     <Switch>
-      {isAuthenticated ? (
-        <>
-          <Route path="/" component={Home} />
-          <Route path="/profile" component={Profile} />
-          <Route path="/browse" component={Browse} />
-          <Route path="/requests" component={Requests} />
-          <Route path="/admin" component={Admin} />
-        </>
-      ) : (
-        <>
-          <Route path="/" component={Landing} />
-          <Route path="/auth" component={AuthPage} />
-        </>
-      )}
+      <Route path="/auth" component={AuthPage} />
+      <Route path="/">
+        {(params) => {
+          // If it's the root path and no user, show landing page
+          if (params === "") {
+            return <Landing />;
+          }
+          return <NotFound />;
+        }}
+      </Route>
+      <Route path="/home">
+        <ProtectedRoute>
+          <Home />
+        </ProtectedRoute>
+      </Route>
+      <Route path="/profile">
+        <ProtectedRoute>
+          <Profile />
+        </ProtectedRoute>
+      </Route>
+      <Route path="/browse">
+        <ProtectedRoute>
+          <Browse />
+        </ProtectedRoute>
+      </Route>
+      <Route path="/requests">
+        <ProtectedRoute>
+          <Requests />
+        </ProtectedRoute>
+      </Route>
+      <Route path="/admin">
+        <ProtectedRoute>
+          <Admin />
+        </ProtectedRoute>
+      </Route>
       <Route component={NotFound} />
     </Switch>
   );
