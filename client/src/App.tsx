@@ -18,16 +18,8 @@ import Admin from "@/pages/admin";
 function Router() {
   return (
     <Switch>
+      <Route path="/" component={Landing} />
       <Route path="/auth" component={AuthPage} />
-      <Route path="/">
-        {(params) => {
-          // If it's the root path and no user, show landing page
-          if (params === "") {
-            return <Landing />;
-          }
-          return <NotFound />;
-        }}
-      </Route>
       <Route path="/home">
         <ProtectedRoute>
           <Home />

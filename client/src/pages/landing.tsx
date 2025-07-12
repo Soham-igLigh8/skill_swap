@@ -48,10 +48,10 @@ export default function Landing() {
               </p>
               <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
                 <Button 
-                  onClick={() => window.location.href = '/api/login'}
+                  onClick={() => window.location.href = '/auth'}
                   className="futuristic-button px-8 py-4 text-lg font-semibold group"
                 >
-                  Start Your Journey
+                  Begin Your Evolution
                   <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
                 </Button>
                 <Button 
